@@ -1,5 +1,7 @@
 # 网易云音乐评论接口逆向模板
 
+[![CI](https://github.com/yuanqishaonvyufan/netease-cloudmusic-comments-reverse/actions/workflows/ci.yml/badge.svg)](https://github.com/yuanqishaonvyufan/netease-cloudmusic-comments-reverse/actions/workflows/ci.yml)
+
 一个面向学习与研究的 Python + JavaScript 网页接口逆向案例。它使用 `PyExecJS` 调用本地 `main.js` 完成网易云 `weapi` 的 AES + RSA 参数加密，再按网页的 `cursor` 逻辑顺序抓取歌曲评论，支持 CSV/JSONL 增量保存。
 
 > 本项目不使用 Selenium、Playwright 等浏览器自动化工具。接口、参数和风控策略可能随网站更新而变化，请仅在遵守网站服务条款和当地法律的前提下，以合理频率用于学习、测试和个人研究。
