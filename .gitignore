@@ -1,0 +1,23 @@
+# Python
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.coverage
+
+# Virtual environments and IDE files
+.venv/
+venv/
+.idea/
+.vscode/
+
+# Local credentials: never commit browser cookies
+config.py
+.env
+.env.*
+
+# Crawler output and locally captured website bundles
+output/
+comments_*.csv
+comments_*.jsonl
+test.js
+*.har
