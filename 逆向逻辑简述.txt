@@ -1,0 +1,20 @@
+网易云音乐评论接口逆向逻辑
+
+一、目标
+不使用浏览器自动化，直接用 Python 批量获取指定歌曲的全部评论。
+
+二、网站的阻碍
+1. 原始分页参数不能直接发送，必须转换成 params 和 encSecKey。
+2. params 使用两层 AES-CBC 加密。
+3. 第二层 AES 的随机密钥又使用 RSA 公钥加密，生成 encSecKey。
+4. 评论使用 cursor 游标翻页，不能只靠普通页码或 offset。
+
+三、解决办法
+1. 抓包定位接口：POST /weapi/comment/resource/comments/get。
+2. 从网页 JS 中提取 asrsea 的 AES + RSA 加密逻辑，整理为 main.js。
+3. Python 使用 ExecJS 调用 getData(i8K)，每页动态生成 params 和 encSecKey。
+4. 请求成功后解析 data.comments，并取出 data.cursor。
+5. 把上一页 cursor 放进下一页参数，重新加密并循环请求，同时根据评论 ID 去重。
+
+四、最终结果
+Python 可以自动完成“构造分页参数 → JS加密 → POST请求 → 解析评论 → cursor翻页”，最后把全部评论保存为 CSV 或 JSONL。
